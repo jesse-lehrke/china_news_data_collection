@@ -1,5 +1,5 @@
 
-# This was a simplied approach to the Pipeline and Search script (forthcoming)
+# This was a simplied approach to the Pipeline and Search script (forthcoming) for collecting from People's Daily
 # It only collects json data, urls can then be used for full scrape (verify? where is code). 
 # This can be efficient and also allows pre-filtering etc
 # Note that "content" returned is not full content!
@@ -31,23 +31,28 @@ import time
 import random
 from requests.exceptions import ProxyError, HTTPError, ConnectionError
 
+# File and paths
 PATH = './DATA/'
-
 json_out = 'running_requests_data.jsonl'
 csv_out = 'peoples_request_data.csv'
 
+# Search parameters
 search_key = '气候变迁'
 broad = True #False # Use False mostly
 per_page = 50 #iirc this is the max
 
-def connection_retry(collected_json):            
+#For function
+NAP_range = [4,8] # min and max second to sleep between urls; lower to be faster but risk blocking (though never had much issues on PD)
+ERROR_wait =  120
+
+def connection_retry(collected_json, nap_range, error_wait):            
     
     try:
 
         print('Fetching page ' + str(data['page']) + ' of ' + str(pages) + ' in ...')
-
-        response = requests.post(url, timeout=30, headers=header, json=data)
         
+        response = requests.post(url, timeout=30, headers=header, json=data)
+
         print(response.elapsed)
         request_times.append(response.elapsed)
 
@@ -66,19 +71,19 @@ def connection_retry(collected_json):
 
         print('Progress check: ' + (str(len(collected_json))))
 
-        nap_time = random.uniform(4, 8)
+        nap_time = random.uniform(nap_range[0], nap_range[1])
         print('Waiting: ' + str(nap_time))
         time.sleep(nap_time)
 
     except ConnectionError:
-        print('Connection error...sleeping for 2 minutes')
-        time.sleep(120)
+        print('Connection error...sleeping for ' + str(error_wait) + ' seconds')
+        time.sleep(error_wait)
         print('Retrying...')
         connection_retry(collected_json) 
     
     except:
-        print('Connection error...sleeping for 2 minutes')
-        time.sleep(120)
+        print('Connection error...sleeping for ' + str(error_wait) + ' seconds')
+        time.sleep(error_wait)
         print('Retrying...')
         connection_retry(collected_json) 
     
@@ -117,7 +122,7 @@ request_times = []
 
 while data['page'] <= pages:
 
-    connection_retry(collected_json)
+    connection_retry(collected_json, NAP_range, ERROR_wait)
 
 # Saving to CSV
 with open(PATH + csv_out, 'w', encoding='utf8', newline='') as output_file:

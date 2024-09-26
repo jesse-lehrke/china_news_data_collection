@@ -3,6 +3,8 @@ INPUT/chromedriver
 DATA/*
 !DATA/.gitkeep 
 !INPUT/.gitkeep
+.collect_venv
+collect_venv/
 
 # STANDARD GIT CREATED
 # Byte-compiled / optimized / DLL files
