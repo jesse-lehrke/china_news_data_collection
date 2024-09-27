@@ -6,8 +6,8 @@ NEXT_FILES/*
 .collect_venv
 collect_venv/
 
-!DATA/.gitkeep 
-!INPUT/.gitkeep
+# !DATA/.gitkeep 
+# !INPUT/.gitkeep
 
 # STANDARD GIT CREATED
 # Byte-compiled / optimized / DLL files
