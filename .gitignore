@@ -1,6 +1,7 @@
 # Added by Repository Creator
 INPUT/chromedriver
 DATA/*
+NEXT_FILES/*
 !DATA/.gitkeep 
 !INPUT/.gitkeep
 .collect_venv

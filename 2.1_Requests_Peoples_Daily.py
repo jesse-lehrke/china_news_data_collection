@@ -29,12 +29,17 @@ import json
 import csv
 import time
 import random
+import os
 from requests.exceptions import ProxyError, HTTPError, ConnectionError
 
 # File and paths
-PATH = './DATA/'
+PATH = './INPUT/' # outputs will be inputs for other scripts, so go here
 json_out = 'running_requests_data.jsonl'
 csv_out = 'peoples_request_data.csv'
+
+# Making input folder is not exists
+if not os.path.exists(PATH):
+    os.makedirs(PATH) 
 
 # Search parameters
 search_key = '气候变迁'
