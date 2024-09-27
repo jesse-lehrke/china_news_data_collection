@@ -1,11 +1,13 @@
 # Added by Repository Creator
 INPUT/chromedriver
 DATA/*
+INPUT/*
 NEXT_FILES/*
-!DATA/.gitkeep 
-!INPUT/.gitkeep
 .collect_venv
 collect_venv/
+
+!DATA/.gitkeep 
+!INPUT/.gitkeep
 
 # STANDARD GIT CREATED
 # Byte-compiled / optimized / DLL files
