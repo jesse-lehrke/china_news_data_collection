@@ -1,0 +1,13 @@
+Keyword used for test scrape of PD: '气候变迁' 
+
+TO DO
+- reorg data and input folders... meaning of course also all PATHS in code 
+    DATA
+        COLLECTED
+        PROCESSED
+        ANALYZED
+        URLS (for url only files)
+        
+Re-consider what I keep from PD collection
+- e.g. includes image could be useful to know: explains short texts
+- some non-url unique identifier ?
